@@ -1,0 +1,108 @@
+#%RAML 0.8
+title: TEST POPULATION Congo API For Orders
+mediaType: application/json
+schemas: !include congo-orders-schemas.raml
+# These common traits and types libraries would normally be hosted in a common repository
+# but are included alongside the main RAML file for clarity in this example
+traits: !include congo-common-traits.raml
+resourceTypes: !include congo-common-types.raml
+/orders:
+  type: 
+    collection: 
+      example-collection: |
+        [
+          { 
+            "id": "2876876",
+            "created": "Tue, 08 Jul 2014 13:00:00 GMT",
+            "customerId": "gi6w4fgi",
+            "totalValue": 237.85,
+            "status": "completed"
+          },
+          { 
+            "id": "987389",
+            "created": "Sun, 20 Jul 2014 19:36:00 GMT",
+            "customerId": "6tg23d6i",
+            "totalValue": 40.24,
+            "status": "in progress"
+          },
+          { 
+            "id": "786176",
+            "created": "Sun, 20 Jul 2014 21:20:00 GMT",
+            "customerId": "gi6w4fgi",
+            "totalValue": 189.70,
+            "status": "in progress"
+          }
+        ]
+      example-member: &order |
+        { 
+          "id": "987389",
+          "created": "Sun, 20 Jul 2014 19:36:00 GMT",
+          "customerId": "6tg23d6i",
+          "totalValue": 40.24,
+          "status": "in progress"
+        }
+      example-newmember: |
+        { 
+          "customerId": "6tg23d6i",
+          "totalValue": 40.24,
+          "orderItems":
+          [
+            {
+              "catalogItemId": "897463"
+            },
+            {
+              "catalogItemId": "79263"
+            }
+          ]
+        }
+  /{orderId}:
+    type: 
+      member: 
+        example-member: *order
+        example-partialmember: |
+          { 
+           "totalValue": 38.29
+          }
+    /orderItems:
+      type: 
+        collection: 
+          example-collection: |
+            [
+              {
+                "id": "762-8768",
+                "description": "Propeller assembly for QuadCopter",
+                "price": 32.55,
+                "catalogItemId": "8726386"
+              },
+              {
+                "id": "179-87324",
+                "description": "Cover for QuadCopter",
+                "price": 4.35,
+                "catalogItemId": "7268679"
+              },
+              {
+                "id": "236-56523",
+                "description": "Sticker set for QuadCopter",
+                "price": 7.99,
+                "catalogItemId": "2345771"
+              }
+            ]
+          example-member: &orderitem |
+            {
+              "id": "762-8768",
+              "description": "Propeller assembly for QuadCopter",
+              "price": 32.55,
+              "catalogItemId": "8726386"
+            }
+          example-newmember: |
+            {
+              "catalogItemId": "27687680"
+            }
+      /{orderItemId}:
+        type: 
+          member: 
+            example-member: *orderitem
+            example-partialmember: |
+              {
+                "price": 74.99
+              }
