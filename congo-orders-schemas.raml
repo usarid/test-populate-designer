@@ -1,0 +1,109 @@
+- orders: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema",
+      "type": "array",
+      "items": 
+      {
+        "type": "object",
+        "properties": 
+        {
+          "id": { "type": "string", "required": true },
+          "created": { "type": "string", "required": true },
+          "customerId": { "type": "string", "required": true },
+          "totalValue": { "type": "number", "required": true },
+          "status": { "type": "string", "required": true, "enum": [ "in progress", "completed", "cancelled" ] }
+        }
+      }
+    }
+- order: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema",
+      "type": "object",
+      "properties": 
+      {
+        "id": { "type": "string", "required": true },
+        "created": { "type": "string", "required": true },
+        "customerId": { "type": "string", "required": true },
+        "totalValue": { "type": "number", "required": true },
+        "status": { "type": "string", "required": true, "enum": [ "in progress", "completed", "cancelled" ] }
+      }
+    }
+- neworder: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema",
+      "type": "object",
+      "properties": 
+      {
+        "customerId": { "type": "string", "required": true },
+        "totalValue": { "type": "number", "required": true },
+        "orderItems":
+        {
+          "type": "array",
+          "items":
+          {
+            "type": "object",
+            "properties":
+            {
+              "catalogItemId": { "type": "string", "required": true }
+            }
+          },
+          "required": true
+        }
+      }
+    }
+- partialorder: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema",
+      "type": "object",
+      "properties": 
+      {
+        "totalValue": { "type": "number", "required": true }
+      }
+    }
+- orderItems: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema",
+      "type": "array",
+      "items": 
+      {
+        "type": "object",
+        "properties": 
+        {
+          "id": { "type": "string", "required": true },
+          "latitude": { "type": "number" },
+          "longitude": { "type": "number" },
+          "altitude": { "type": "number" },
+          "name": { "type": "string", "required": true }
+        }
+      }
+    }
+- orderItem: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema",
+      "type": "object",
+      "properties": 
+      {
+        "id": { "type": "string", "required": true },
+        "description": { "type": "string", "required": true },
+        "price": { "type": "number", "required": true },
+        "catalogItemId": { "type": "string", "required": true }
+      }
+    }
+- neworderItem: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema",
+      "type": "object",
+      "properties": 
+      {
+        "catalogItemId": { "type": "string", "required": true }
+      }
+    }
+- partialorderItem: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema",
+      "type": "object",
+      "properties": 
+      {
+        "name": { "type": "string", "required": true }
+      }
+    }
