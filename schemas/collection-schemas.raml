@@ -1,0 +1,96 @@
+- users: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema" ,
+      "type": "array",
+      "items": 
+      {
+        "type": "object",
+        "properties": 
+        {
+          "id": { "type": "string", "required": true },
+          "name": { "type": "string", "required": true },
+          "email": { "type": "string", "required": true }
+        }
+      }
+    }
+- user: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema" ,
+      "type": "object",
+      "properties": 
+      {
+        "id": { "type": "string", "required": true },
+        "name": { "type": "string", "required": true },
+        "email": { "type": "string", "required": true }
+      }
+    }
+- newuser: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema" ,
+      "type": "object",
+      "properties": 
+      {
+        "name": { "type": "string", "required": true },
+        "email": { "type": "string", "required": true }
+      }
+    }
+- partialuser: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema" ,
+      "type": "object",
+      "properties": 
+      {
+        "name": { "type": "string", "required": false },
+        "email": { "type": "string", "required": false }
+      }
+    }
+- books: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema" ,
+      "type": "array",
+      "items": 
+      {
+        "type": "object",
+        "properties": 
+        {
+          "id": { "type": "string", "required": true },
+          "title": { "type": "string", "required": true },
+          "author": { "type": "string", "required": false },
+          "pages": { "type": "number", "required": true }
+        }
+      }
+    }
+- book: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema" ,
+      "type": "object",
+      "properties": 
+      {
+        "id": { "type": "string", "required": true },
+        "title": { "type": "string", "required": true },
+        "author": { "type": "string", "required": false },
+        "pages": { "type": "number", "required": true }
+      }
+    }
+- newbook: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema" ,
+      "type": "object",
+      "properties": 
+      {
+        "title": { "type": "string", "required": true },
+        "author": { "type": "string", "required": false },
+        "pages": { "type": "number", "required": true }
+      }
+    }
+- partialbook: |
+    {
+      "$schema": "http://json-schema.org/draft-03/schema" ,
+      "type": "object",
+      "properties": 
+      {
+        "title": { "type": "string", "required": false },
+        "author": { "type": "string", "required": false },
+        "pages": { "type": "number", "required": false }
+      }
+    }
