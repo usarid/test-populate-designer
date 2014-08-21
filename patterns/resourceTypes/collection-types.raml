@@ -1,0 +1,52 @@
+- baseResource:
+    is: [ accountable ]
+- collection:
+    type: baseResource
+    get:
+      is: [ paged ]
+      responses:
+        200:
+          body:
+            schema: <<resourcePathName>>
+            example: <<example-collection>>
+    post:
+      body:
+        schema: new<<resourcePathName | !singularize>>
+        example: <<example-newmember>>
+      responses:
+        201:
+          headers:
+            Location:
+              # example: <<resourcePath>>/<<example-member-id>>
+          body:
+            schema: <<resourcePathName | !singularize>>
+            example: <<example-member>>
+- member:
+    type: baseResource
+    get:
+      responses:
+        200:
+          body:
+            schema: <<resourcePathName | !singularize>>
+            example: <<example-member>>
+    put:
+      body:
+        schema: new<<resourcePathName | !singularize>>
+        example: <<example-newmember>>
+      responses:
+        200:
+          body:
+            schema: <<resourcePathName | !singularize>>
+            example: <<example-member>>
+    patch:
+      body:
+        schema: partial<<resourcePathName | !singularize>>
+        example: <<example-partialmember>>
+      responses:
+        200:
+          body:
+            schema: <<resourcePathName | !singularize>>
+            example: <<example-member>>
+    delete:
+      responses:
+        204:
