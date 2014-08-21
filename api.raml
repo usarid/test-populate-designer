@@ -1,108 +1,41 @@
 #%RAML 0.8
-title: TEST POPULATION Congo API For Orders
+baseUri: http://mocksvc.mulesoft.com/mocks/f9c19cd6-2601-4c84-bd5c-8435fb4430f6
+title: Modeling Collections
+documentation:
+  - title: Example of how to model a CRUD API of collections and members
+    content: |
+      By defining resources, schemas and resourceTypes with appropriate names,
+      you can model an API for any hierarchy of resource collections
+      and members very succinctly and consistently.
 mediaType: application/json
-schemas: !include congo-orders-schemas.raml
-# These common traits and types libraries would normally be hosted in a common repository
-# but are included alongside the main RAML file for clarity in this example
-traits: !include resourceTypes/bases/base1.raml
-resourceTypes: !include congo-common-types.raml
-/orders:
+schemas: !include schemas/collection-schemas.raml
+resourceTypes: !include patterns/resourceTypes/collection-types.raml
+traits: !include patterns/traits/collection-traits.raml
+/users:
   type: 
     collection: 
-      example-collection: |
-        [
-          { 
-            "id": "2876876",
-            "created": "Tue, 08 Jul 2014 13:00:00 GMT",
-            "customerId": "gi6w4fgi",
-            "totalValue": 237.85,
-            "status": "completed"
-          },
-          { 
-            "id": "987389",
-            "created": "Sun, 20 Jul 2014 19:36:00 GMT",
-            "customerId": "6tg23d6i",
-            "totalValue": 40.24,
-            "status": "in progress"
-          },
-          { 
-            "id": "786176",
-            "created": "Sun, 20 Jul 2014 21:20:00 GMT",
-            "customerId": "gi6w4fgi",
-            "totalValue": 189.70,
-            "status": "in progress"
-          }
-        ]
-      example-member: &order |
-        { 
-          "id": "987389",
-          "created": "Sun, 20 Jul 2014 19:36:00 GMT",
-          "customerId": "6tg23d6i",
-          "totalValue": 40.24,
-          "status": "in progress"
-        }
-      example-newmember: |
-        { 
-          "customerId": "6tg23d6i",
-          "totalValue": 40.24,
-          "orderItems":
-          [
-            {
-              "catalogItemId": "897463"
-            },
-            {
-              "catalogItemId": "79263"
-            }
-          ]
-        }
-  /{orderId}:
+      example-collection: !include example-users.json
+      example-member: !include example-user.json
+      example-newmember: !include example-newuser.json
+      # example-member-id: gi68q2id6g
+  /{userId}:
     type: 
       member: 
-        example-member: *order
-        example-partialmember: |
-          { 
-           "totalValue": 38.29
-          }
-    /orderItems:
+        example-member: !include example-user.json
+        example-newmember: !include example-newuser.json
+        example-partialmember: !include example-partialuser.json
+    /books:
+      is: [ accountable ]
       type: 
         collection: 
-          example-collection: |
-            [
-              {
-                "id": "762-8768",
-                "description": "Propeller assembly for QuadCopter",
-                "price": 32.55,
-                "catalogItemId": "8726386"
-              },
-              {
-                "id": "179-87324",
-                "description": "Cover for QuadCopter",
-                "price": 4.35,
-                "catalogItemId": "7268679"
-              },
-              {
-                "id": "236-56523",
-                "description": "Sticker set for QuadCopter",
-                "price": 7.99,
-                "catalogItemId": "2345771"
-              }
-            ]
-          example-member: &orderitem |
-            {
-              "id": "762-8768",
-              "description": "Propeller assembly for QuadCopter",
-              "price": 32.55,
-              "catalogItemId": "8726386"
-            }
-          example-newmember: |
-            {
-              "catalogItemId": "27687680"
-            }
-      /{orderItemId}:
+          example-collection: !include example-books.json
+          example-member: !include example-book.json
+          example-newmember: !include example-newbook.json
+          # example-member-id: 123
+      /{bookId}:
+        is: [ accountable ]
         type: 
           member: 
-            example-member: *orderitem
-            example-partialmember: |
-              {
-                "price": 74.99
-              }
+            example-member: !include example-book.json
+            example-newmember: !include example-newbook.json
+            example-partialmember: !include example-partialbook.json
