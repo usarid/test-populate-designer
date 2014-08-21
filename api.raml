@@ -4,7 +4,7 @@ mediaType: application/json
 schemas: !include congo-orders-schemas.raml
 # These common traits and types libraries would normally be hosted in a common repository
 # but are included alongside the main RAML file for clarity in this example
-traits: !include congo-common-traits.raml
+traits: resourceTypes/bases/base1.raml
 resourceTypes: !include congo-common-types.raml
 /orders:
   type: 
